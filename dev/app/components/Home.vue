@@ -1,7 +1,8 @@
 <template>
     <Page class="page">
 
-  <GridLayout columns="*" rows="*,80" @touch="onTouch">
+
+  <GridLayout columns="*" rows="80,*,80" @touch="onTouch">
 <!--    <ParticleEmitter ref="emiter1" row="0" col="0"
       isEmitting="true" 
       showDebug="false"
@@ -34,25 +35,29 @@
       emitAngleVariation="360" 
       colorPalette="black"/>-->
 
-    <ParticleEmitter ref="emiter3" row="0" col="0" rowSpan="2"
-      isEmitting="true" 
+    <ParticleEmitter ref="emiter3" row="1" col="0" rowSpan="2"
+      :isEmitting="isEmitting" 
       showDebug="false"
       :emitOriginX="emitOriginX"
       :emitOriginY="emitOriginY" 
-      emitOriginWidth="1"
-      emitOriginHeight="1"
-      particleDuration="3000"
-      emitCount="10" 
-      emitInterval="50"  
-      emitDistance="100"  
+      emitOriginWidth="10"
+      emitOriginHeight="10"
+      particleDuration="5000"
+      emitCount="150" 
+      emitInterval="60"  
+      emitDistance="400"  
       emitDistanceVariation="150"  
       emitAngle="-90"  
-      emitAngleVariation="20" 
-      colorPalette="#000000,#222222,#555555,#FF0000"/>
+      emitAngleVariation="360" 
+      colorPalette="black"/>
            
-      <Button row="1" col="0" @tap="shareDemo" :text="shareButtonText"></Button>         
-      <Label class="copy" text="Sylwester Technologies © 2019" row="1" col="0"></Label>
+      <Button row="2" col="0" @tap="shareDemo" :text="shareButtonText"></Button>         
+      <Label class="copy" text="Sylwester Technologies © 2019" row="2" col="0"></Label>
       
+      <GridLayout columns="*,*" rows="*,*" row="0" col="0">
+        <Switch checked="true" row="0" col="0" @checkedChange="switchChange" />
+        <Label :text="'isEmitting: '+isEmitting" row="0" col="1"/>
+      </GridLayout>
       
   </GridLayout>
         
@@ -71,7 +76,8 @@ export default {
         info:"Hello",
         emitOriginX: platformModule.screen.mainScreen.widthDIPs/2,
         emitOriginY: platformModule.screen.mainScreen.heightDIPs/2,
-        shareButtonText: "Share"
+        shareButtonText: "Share",
+        isEmitting: true
       }
     },
 
@@ -81,6 +87,17 @@ export default {
       
     methods: {
       
+      switchChange() {
+        
+        console.log('switch change');
+        if(this.isEmitting == false) {
+          this.isEmitting = true;
+        } else {
+          this.isEmitting = false;
+        }
+        
+      },
+      
       onTouch(args) {
         //this.touchPoint = [parseInt(args.getX()), parseInt(args.getY())];
         
@@ -88,15 +105,12 @@ export default {
         
         if(args.action == 'move') {
           
-          console.log(parseInt(args.getX()),parseInt(args.getY()))
+          //console.log(parseInt(args.getX()),parseInt(args.getY()))
           
           this.emitOriginX = parseInt(args.getX()).toString();
           this.emitOriginY = parseInt(args.getY()).toString();
           
-//          let perc = parseInt(args.getY())/H
-//          console.log('down',perc)
-//          gravity = Number(((2*perc) - 1).toFixed(3));
-//          this.grav = ((gravity*100)+100)/2
+
         }
       },
       
@@ -105,7 +119,10 @@ export default {
 //        this.demoState = "Stop";
 //        let image = this.imgSrc;
 //        SocialShare.shareImage(image);
-      }      
+      }
+      
+      
+      
       
       
     }

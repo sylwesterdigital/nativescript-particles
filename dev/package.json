@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.particleemitter",
+    "id": "com.flaboy.particles",
     "tns-android": {
       "version": "6.1.0"
     },
@@ -9,8 +9,8 @@
     }
   },
   "description": "NativeScript Application",
-  "license": "SEE LICENSE IN <your-license-filename>",
-  "repository": "<fill-your-repository-here>",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": "https://github.com/sylwesterdigital/nativescript-particles.git",
   "dependencies": {
     "nativescript-particle-emitter": "^1.0.1",
     "nativescript-theme-core": "~1.0.6",
